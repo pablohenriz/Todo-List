@@ -1,0 +1,181 @@
+/* =========================================
+   RESET E CONFIGURAÇÕES GERAIS
+   ========================================= */
+* {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: system-ui, -apple-system, sans-serif;
+}
+
+body {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     min-height: 100vh;
+     background-color: #f4f4f9;
+     color: #333;
+}
+
+h1 {
+     margin-top: 40px;
+     margin-bottom: 5px;
+     font-size: 50px;
+}
+
+p {
+     font-size: 14px;
+     color: #666;
+     margin-bottom: 20px;
+}
+
+/* =========================================
+   ÁREA DE INPUT E BOTÃO ADICIONAR
+   ========================================= */
+.box {
+     display: flex;
+     gap: 10px;
+}
+
+input {
+     padding: 10px 15px;
+     border: 2px solid #ccc;
+     border-radius: 8px;
+     outline: none;
+     font-size: 16px;
+     transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus {
+     border-color: #4CAF50;
+     box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+     /* Brilho verde ao clicar */
+}
+
+/* Estilo específico APENAS para o botão de Adicionar */
+#btnAdicionar {
+     padding: 10px 20px;
+     background-color: #4CAF50;
+     color: white;
+     border: none;
+     border-radius: 8px;
+     font-size: 16px;
+     font-weight: bold;
+     cursor: pointer;
+     transition: background-color 0.2s, transform 0.1s;
+}
+
+#btnAdicionar:hover {
+     background-color: #45a049;
+}
+
+#btnAdicionar:active {
+     transform: scale(0.95);
+     /* Efeito de apertar o botão */
+}
+
+/* =========================================
+   ÁREA DA LISTA
+   ========================================= */
+.box1 {
+     margin-top: 30px;
+     width: 100%;
+     max-width: 450px;
+     /* Um pouquinho mais largo para caber os botões */
+     display: flex;
+     justify-content: center;
+}
+
+ul {
+     list-style: none;
+     width: 100%;
+}
+
+/* O ITEM DA LISTA (O cartãozinho da tarefa) */
+li {
+     width: 100%;
+     background-color: #ffffff;
+     border-left: 5px solid #4CAF50;
+     border-radius: 8px;
+     padding: 12px 15px;
+     margin-bottom: 12px;
+     font-size: 16px;
+     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     transition: all 0.2s ease;
+     animation: aparecer 0.3s ease forwards;
+     /* Animação ao adicionar */
+}
+
+/* Efeito ao passar o mouse no cartão inteiro */
+li:hover {
+     transform: translateY(-2px);
+     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* O TEXTO DA TAREFA */
+.texto-tarefa {
+     flex: 1;
+     /* Faz o texto ocupar todo o espaço vazio */
+     word-break: break-word;
+     /* Se o texto for longo, ele desce de linha bonitinho */
+     margin-right: 15px;
+     /* Espaço para não encostar nos botões */
+}
+
+/* A CAIXA DOS BOTÕES DE EDITAR/EXCLUIR */
+.acoes {
+     display: flex;
+     gap: 8px;
+     opacity: 0.4;
+     /* Deixa os botões discretos por padrão */
+     transition: opacity 0.2s ease;
+}
+
+/* Quando passa o mouse na tarefa, os botões ficam 100% visíveis */
+li:hover .acoes {
+     opacity: 1;
+}
+
+/* ESTILO DOS BOTÕES DE EDITAR E EXCLUIR */
+.acoes button {
+     background: transparent;
+     /* Tira o fundo verde global */
+     border: none;
+     font-size: 18px;
+     padding: 4px 8px;
+     border-radius: 6px;
+     cursor: pointer;
+     transition: all 0.2s;
+}
+
+/* Efeito ao passar o mouse no botão de Editar */
+.acoes button:first-child:hover {
+     background-color: #e3f2fd;
+     /* Fundo azulzinho claro */
+     transform: scale(1.1);
+}
+
+/* Efeito ao passar o mouse no botão de Excluir */
+.acoes button:last-child:hover {
+     background-color: #ffebee;
+     /* Fundo vermelhinho claro */
+     transform: scale(1.1);
+}
+
+/* =========================================
+   ANIMAÇÃO DE ENTRADA DA TAREFA
+   ========================================= */
+@keyframes aparecer {
+     from {
+          opacity: 0;
+          transform: translateY(10px);
+     }
+
+     to {
+          opacity: 1;
+          transform: translateY(0);
+     }
+}

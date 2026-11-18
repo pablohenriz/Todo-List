@@ -1,0 +1,63 @@
+//Texto da tarefa
+const tarefa = document.getElementById("tarefaText");
+
+//Botao de adicionar tarefa
+const botao = document.getElementById("btnAdicionar");
+
+//Lista para mostrar as terefas para o usuario
+const lista = document.getElementById("listaTask");
+
+function Adicionar() {
+     //Pegando o texto e tirando o espacos dos cantos
+     const texto = tarefa.value.trim();
+
+     //Valida se o texto esta vazio
+     if(texto === "") {
+          alert("O texto nao pode ser vazio");
+          return; 
+     }
+
+     //Criando um id para cada tarefa
+     const idUnico = Date.now;
+
+     //criando o li
+     const item = document.createElement('li');
+
+     item.dataset.id = idUnico;
+
+     //Adicionando o elemento span e a sua classe junto com o texto
+     const spanTexto = document.createElement('span')
+     spanTexto.textContent = texto;
+     spanTexto.classList.add('texto-tarefa');
+
+     //Aonde vai ficar os botoes de editar e excluir
+     const divAcoes = document.createElement('div');
+     divAcoes.classList.add('acoes');
+
+
+     //Botoes
+     const btnEditar = document.createElement('button');
+     btnEditar.textContent = '✏️';
+     btnEditar.id = `editar-${idUnico}`; //juntando o id da acao
+
+     const btnExcluir = document.createElement('button');
+     btnExcluir.textContent = '🗑️';
+     btnExcluir.id = `excluir-${idUnico}`;
+
+     //Estrutura dos elementos
+     divAcoes.appendChild(btnEditar);
+     divAcoes.appendChild(btnExcluir);
+
+     //Coloca o li dentro do ul
+     lista.appendChild(item);
+
+     item.appendChild(spanTexto);
+     item.appendChild(btnEditar);
+     item.appendChild(btnExcluir);
+
+     //limpar o input
+     tarefa.value = '';
+     tarefa.focus();
+}
+
+botao.addEventListener("click", Adicionar);
