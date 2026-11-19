@@ -1,12 +1,33 @@
-//Texto da tarefa
+//ELEMENTOS DO CODIGO
+
+//input da tarefa
 const tarefa = document.getElementById("tarefaText");
 
 //Botao de adicionar tarefa
 const botao = document.getElementById("btnAdicionar");
 
+
+
+//Texto edit
+const textEdit = document.getElementById("tarefaTextEd");
+
+//btn de editar
+const btnEdit = document.getElementById("btnEditar");
+
+
+
 //Lista para mostrar as terefas para o usuario
 const lista = document.getElementById("listaTask");
 
+//colocar o popap de editar como nulo
+const editPopap = document.getElementById("popapEdit");
+editPopap.style.display = 'none';
+
+
+
+//Fucionalidades
+
+//Adicionar tarefa
 function Adicionar() {
      //Pegando o texto e tirando o espacos dos cantos
      const texto = tarefa.value.trim();
@@ -18,7 +39,7 @@ function Adicionar() {
      }
 
      //Criando um id para cada tarefa
-     const idUnico = Date.now;
+     const idUnico = Date.now();
 
      //criando o li
      const item = document.createElement('li');
@@ -39,6 +60,7 @@ function Adicionar() {
      const btnEditar = document.createElement('button');
      btnEditar.textContent = '✏️';
      btnEditar.id = `editar-${idUnico}`; //juntando o id da acao
+     btnEditar.classList.add('editTask')
 
      const btnExcluir = document.createElement('button');
      btnExcluir.textContent = '🗑️';
@@ -61,3 +83,37 @@ function Adicionar() {
 }
 
 botao.addEventListener("click", Adicionar);
+
+let idEmEdicao = null; // vai guardar o id para edição 
+
+
+//Pegando o Id da task
+lista.addEventListener('click', (e) => {
+     const li = e.target.closest('li');
+     if(!li) return; 
+
+     //guardando o id do li 
+     const id = li.dataset.id;
+
+     //verificando se o item clicado for uma Task para editar
+     if(e.target.id.startsWith('editar-')) {
+          Editar(id, li); 
+     }
+
+     if(e.target.id.startsWith('excluir-')) {
+          Excluir(id, li);
+     }
+});
+
+textEdit.addEventListener('click', () => {
+     if(editPopap.style.display == 'none') {
+          editPopap.style.display = '';
+     } else {
+          editPopap.style.display = 'none';j
+     }
+});
+
+function Editar(id, li) {
+     const task = id;
+
+}
