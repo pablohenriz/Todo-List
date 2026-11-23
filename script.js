@@ -75,8 +75,7 @@ function Adicionar() {
      lista.appendChild(item);
 
      item.appendChild(spanTexto);
-     item.appendChild(btnEditar);
-     item.appendChild(btnExcluir);
+     item.appendChild(divAcoes);
 
      //limpar o input
      tarefa.value = '';
@@ -88,18 +87,18 @@ botao.addEventListener("click", Adicionar);
 //Pegando o Id da task
 lista.addEventListener('click', (e) => {
      const li = e.target.closest('li');
-     if(!li) return; 
+     if (!li) return;
 
      //guardando o id do li 
      const id = li.dataset.id;
 
      //verificando se o item clicado for uma Task para editar
-     if(e.target.id.startsWith('editar-')) {
-          Editar(id, li); 
+     if (e.target.id.startsWith('editar-')) {
+          Editar(id, li);
      }
 
-     if(e.target.id.startsWith('excluir-')) {
-          Excluir(id, li);
+     if (e.target.id.startsWith('excluir-')) {
+          Excluir(li);
      }
 });
 
@@ -112,6 +111,7 @@ const tarefaEdit = document.getElementById("tarefaTextEd");
 let idEmEdicao = null;
 let liEmEdicao = null;
 
+//Funcao para poder editar o texto
 function Editar(id, li) {
      idEmEdicao = id; 
      liEmEdicao = li;
@@ -124,6 +124,7 @@ function Editar(id, li) {
      editPopap.style.display = '';
 } 
 
+//Btn de salvar
 btnEdit.addEventListener("click", (e) => {
      e.preventDefault();
      const texto = tarefaEdit.value.trim();
@@ -133,10 +134,10 @@ btnEdit.addEventListener("click", (e) => {
           return;
      } 
 
-     const span = li.querySelector('span'); 
+     const span = liEmEdicao.querySelector('span'); 
 
      if(span) {
-          tarefaEdit.value = span.textContent;
+          span.textContent = texto;
      }
 
      editPopap.style.display = 'none';
@@ -144,3 +145,9 @@ btnEdit.addEventListener("click", (e) => {
      idEmEdicao = null;
      liEmEdicao = null;
 });
+
+function Excluir(li) {
+     const task = li;
+
+     task.remove();
+}

@@ -1,4 +1,22 @@
 /* =========================================
+   VARIÁVEIS GLOBAIS
+   ========================================= */
+:root {
+     --primary: #4CAF50;
+     --primary-dark: #45a049;
+     --primary-light: rgba(76, 175, 80, 0.2);
+     --bg: #f4f4f9;
+     --card-bg: #ffffff;
+     --text: #333;
+     --text-muted: #666;
+     --border: #ccc;
+     --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.05);
+     --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.1);
+     --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.2);
+     --radius: 8px;
+}
+
+/* =========================================
    RESET E CONFIGURAÇÕES GERAIS
    ========================================= */
 * {
@@ -13,20 +31,23 @@ body {
      flex-direction: column;
      align-items: center;
      min-height: 100vh;
-     background-color: #f4f4f9;
-     color: #333;
+     background-color: var(--bg);
+     color: var(--text);
+     padding: 0 16px;
 }
 
 h1 {
      margin-top: 40px;
      margin-bottom: 5px;
      font-size: 50px;
+     text-align: center;
 }
 
 p {
      font-size: 14px;
-     color: #666;
+     color: var(--text-muted);
      margin-bottom: 20px;
+     text-align: center;
 }
 
 /* =========================================
@@ -35,43 +56,48 @@ p {
 .box {
      display: flex;
      gap: 10px;
+     width: 100%;
+     max-width: 450px;
 }
 
 input {
+     flex: 1;
      padding: 10px 15px;
-     border: 2px solid #ccc;
-     border-radius: 8px;
+     border: 2px solid var(--border);
+     border-radius: var(--radius);
      outline: none;
      font-size: 16px;
      transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 input:focus {
-     border-color: #4CAF50;
-     box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
-     /* Brilho verde ao clicar */
+     border-color: var(--primary);
+     box-shadow: 0 0 0 3px var(--primary-light);
 }
 
-/* Estilo específico APENAS para o botão de Adicionar */
-#btnAdicionar {
+/* Estilo dos botões principais (Adicionar e Editar) */
+#btnAdicionar,
+#btnEditar {
      padding: 10px 20px;
-     background-color: #4CAF50;
+     background-color: var(--primary);
      color: white;
      border: none;
-     border-radius: 8px;
+     border-radius: var(--radius);
      font-size: 16px;
      font-weight: bold;
      cursor: pointer;
      transition: background-color 0.2s, transform 0.1s;
+     white-space: nowrap;
 }
 
-#btnAdicionar:hover {
-     background-color: #45a049;
+#btnAdicionar:hover,
+#btnEditar:hover {
+     background-color: var(--primary-dark);
 }
 
-#btnAdicionar:active {
+#btnAdicionar:active,
+#btnEditar:active {
      transform: scale(0.95);
-     /* Efeito de apertar o botão */
 }
 
 /* =========================================
@@ -81,7 +107,6 @@ input:focus {
      margin-top: 30px;
      width: 100%;
      max-width: 450px;
-     /* Um pouquinho mais largo para caber os botões */
      display: flex;
      justify-content: center;
 }
@@ -91,58 +116,50 @@ ul {
      width: 100%;
 }
 
-/* O ITEM DA LISTA (O cartãozinho da tarefa) */
+/* O ITEM DA LISTA (cartão da tarefa) */
 li {
      width: 100%;
-     background-color: #ffffff;
-     border-left: 5px solid #4CAF50;
-     border-radius: 8px;
+     background-color: var(--card-bg);
+     border-left: 5px solid var(--primary);
+     border-radius: var(--radius);
      padding: 12px 15px;
      margin-bottom: 12px;
      font-size: 16px;
-     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+     box-shadow: var(--shadow-sm);
      display: flex;
      justify-content: space-between;
      align-items: center;
      transition: all 0.2s ease;
      animation: aparecer 0.3s ease forwards;
-     /* Animação ao adicionar */
 }
 
-/* Efeito ao passar o mouse no cartão inteiro */
 li:hover {
      transform: translateY(-2px);
-     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+     box-shadow: var(--shadow-md);
 }
 
-/* O TEXTO DA TAREFA */
+/* Texto da tarefa */
 .texto-tarefa {
      flex: 1;
-     /* Faz o texto ocupar todo o espaço vazio */
      word-break: break-word;
-     /* Se o texto for longo, ele desce de linha bonitinho */
      margin-right: 15px;
-     /* Espaço para não encostar nos botões */
 }
 
-/* A CAIXA DOS BOTÕES DE EDITAR/EXCLUIR */
+/* Caixa dos botões editar/excluir */
 .acoes {
      display: flex;
      gap: 8px;
      opacity: 0.4;
-     /* Deixa os botões discretos por padrão */
      transition: opacity 0.2s ease;
 }
 
-/* Quando passa o mouse na tarefa, os botões ficam 100% visíveis */
 li:hover .acoes {
      opacity: 1;
 }
 
-/* ESTILO DOS BOTÕES DE EDITAR E EXCLUIR */
+/* Botões de ação (editar/excluir) */
 .acoes button {
      background: transparent;
-     /* Tira o fundo verde global */
      border: none;
      font-size: 18px;
      padding: 4px 8px;
@@ -151,18 +168,46 @@ li:hover .acoes {
      transition: all 0.2s;
 }
 
-/* Efeito ao passar o mouse no botão de Editar */
 .acoes button:first-child:hover {
      background-color: #e3f2fd;
-     /* Fundo azulzinho claro */
      transform: scale(1.1);
 }
 
-/* Efeito ao passar o mouse no botão de Excluir */
 .acoes button:last-child:hover {
      background-color: #ffebee;
-     /* Fundo vermelhinho claro */
      transform: scale(1.1);
+}
+
+/* =========================================
+   POPUP DE EDIÇÃO (MODAL)
+   ========================================= */
+#popapEdit {
+     /* O JS controla o display inicial como 'none' */
+     display: flex;
+     flex-direction: column;
+     gap: 12px;
+
+     position: fixed;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     width: 320px;
+     max-width: 90%;
+     background-color: var(--card-bg);
+     padding: 24px;
+     border-radius: 12px;
+     box-shadow: var(--shadow-lg);
+     z-index: 1000;
+}
+
+/* Input dentro do popup ocupa toda a largura */
+#tarefaTextEd {
+     width: 100%;
+}
+
+/* Botão editar dentro do popup ocupa toda a largura */
+#btnEditar {
+     width: 100%;
 }
 
 /* =========================================
@@ -177,5 +222,28 @@ li:hover .acoes {
      to {
           opacity: 1;
           transform: translateY(0);
+     }
+}
+
+/* =========================================
+   RESPONSIVIDADE BÁSICA
+   ========================================= */
+@media (max-width: 480px) {
+     h1 {
+          font-size: 36px;
+          margin-top: 24px;
+     }
+
+     .box {
+          flex-direction: column;
+     }
+
+     #btnAdicionar {
+          width: 100%;
+     }
+
+     #popapEdit {
+          width: 90%;
+          padding: 20px;
      }
 }
