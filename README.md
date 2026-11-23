@@ -24,3 +24,5 @@ Uma aplicação web simples, moderna e funcional para gerenciamento de tarefas (
 ├── index.html      # Estrutura principal da aplicação
 ├── style.css       # Estilização e design da interface
 └── script.js       # Lógica e manipulação de dados
+```
+## Link do Projeto: [Todo-list](https://pablohenriz.github.io/Todo-List/).
