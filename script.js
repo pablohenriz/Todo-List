@@ -44,6 +44,7 @@ function Adicionar() {
      //criando o li
      const item = document.createElement('li');
 
+     //colocando o id unico dentro do item (li)
      item.dataset.id = idUnico;
 
      //Adicionando o elemento span e a sua classe junto com o texto
@@ -84,9 +85,6 @@ function Adicionar() {
 
 botao.addEventListener("click", Adicionar);
 
-let idEmEdicao = null; // vai guardar o id para edição 
-
-
 //Pegando o Id da task
 lista.addEventListener('click', (e) => {
      const li = e.target.closest('li');
@@ -105,15 +103,44 @@ lista.addEventListener('click', (e) => {
      }
 });
 
-textEdit.addEventListener('click', () => {
-     if(editPopap.style.display == 'none') {
-          editPopap.style.display = '';
-     } else {
-          editPopap.style.display = 'none';j
-     }
-});
+
+
+
+//input do edit para o usuario
+const tarefaEdit = document.getElementById("tarefaTextEd");
+
+let idEmEdicao = null;
+let liEmEdicao = null;
 
 function Editar(id, li) {
-     const task = id;
+     idEmEdicao = id; 
+     liEmEdicao = li;
 
-}
+     const span = li.querySelector('span');
+     if(span) {
+          tarefaEdit.value = span.textContent;
+     }
+
+     editPopap.style.display = '';
+} 
+
+btnEdit.addEventListener("click", (e) => {
+     e.preventDefault();
+     const texto = tarefaEdit.value.trim();
+
+     if(texto === '') {
+          alert("Escreva alguam coisa por favor");
+          return;
+     } 
+
+     const span = li.querySelector('span'); 
+
+     if(span) {
+          tarefaEdit.value = span.textContent;
+     }
+
+     editPopap.style.display = 'none';
+
+     idEmEdicao = null;
+     liEmEdicao = null;
+});
